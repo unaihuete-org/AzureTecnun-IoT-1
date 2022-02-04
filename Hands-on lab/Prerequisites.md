@@ -65,7 +65,7 @@ From the machine, download the lab artifacts from GitHub.
 
    ![Download .zip containing the repository](media/github-download-repo.png 'Download ZIP')
 
-3. Unzip the contents to your root hard drive (for example, Desktop folder). This will create a folder on your root drive named `MCW-Predictive-Maintenance-for-remote-field-devices-master`.
+3. Unzip (right click > Extract all) the contents to your root hard drive (for example, Desktop folder). This will create a folder on your root drive named `AzureTecnun-IoT-1-main`.
 
 ### Task 2: Provision a resource group
 
@@ -83,7 +83,7 @@ In this task, you will create an Azure resource group for the resources used thr
 
    ![Add Resource Group Menu](media/add-resource-group-menu.png 'Resource Group Menu')
 
-5. Create a new resource group with the name **Fabrikam_Oil**, ensure the proper subscription and region nearest you are selected. Then select **Review + Create**.
+5. Create a new resource group with the name **Fabrikam_Oil**, ensure the proper subscription and **region nearest you are** selected. Then select **Review + Create**.
 
    ![Create Resource Group](media/create-resource-group.png 'Resource Group')
 
@@ -123,9 +123,7 @@ Azure Databricks is used to train and deploy a machine learning model that predi
 
    ![Launch Workspace](media/databricks-launch-workspace.png 'Launch Workspace')
 
-3. Once in the workspace, select **Clusters** in the left-hand menu, then select **+ Create Cluster**.
-
-   ![Create Cluster is highlighted.](media/databricks-clusters.png 'Clusters')
+3. Once in the workspace, select **Compute** in the left-hand menu, then select **+ Create Cluster**.
 
 4. In the **New Cluster** form, specify the following configuration options:
 
@@ -152,7 +150,7 @@ In this task, you will import a Databricks notebook into your workspace.
 
    ![The Import link is highlighted in the Workspace.](media/databricks-import-link.png 'Workspace')
 
-2. Keep **File** selected next to **Import from**, select or drag and drop the file `C:\MCW-Predictive-Maintenance-for-remote-field-devices-master\Hands-on lab\Resources\Notebooks\Anomaly Detection.ipynb`, then select **Import**.
+2. Keep **File** selected next to **Import from**, select or drag and drop the file `\Hands-on lab\Resources\Notebooks\Anomaly Detection.ipynb`, then select **Import**.
 
    ![The file import form is displayed with the Anomaly Detection.ipynb file selected.](media/databricks-import.png 'Import Notebooks')
 
