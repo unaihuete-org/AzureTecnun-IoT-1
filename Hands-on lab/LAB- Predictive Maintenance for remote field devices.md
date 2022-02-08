@@ -12,64 +12,11 @@ Hands-on lab step-by-step
 May 2021
 </div>
 
-Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
-
-Microsoft may have patents, patent applications, trademarks, copyrights, or other intellectual property rights covering subject matter in this document. Except as expressly provided in any written license agreement from Microsoft, the furnishing of this document does not give you any license to these patents, trademarks, copyrights, or other intellectual property.
-
 The names of manufacturers, products, or URLs are provided for informational purposes only and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
 
 © 2021 Microsoft Corporation. All rights reserved.
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
-
-**Contents**
-
-<!-- TOC -->
-
-- [Predictive Maintenance for remote field devices hands-on lab step-by-step](#predictive-maintenance-for-remote-field-devices-hands-on-lab-step-by-step)
-  - [Abstract and learning objectives](#abstract-and-learning-objectives)
-  - [Overview](#overview)
-  - [Solution architecture](#solution-architecture)
-  - [Requirements](#requirements)
-  - [Before the hands-on lab](#before-the-hands-on-lab)
-  - [Exercise 1: Configuring IoT Central with devices and metadata](#exercise-1-configuring-iot-central-with-devices-and-metadata)
-    - [Task 1: Model the telemetry data](#task-1-model-the-telemetry-data)
-    - [Task 2: Create an IoT Central application](#task-2-create-an-iot-central-application)
-    - [Task 3: Create the Device Template](#task-3-create-the-device-template)
-    - [Task 4: Create and provision real devices](#task-4-create-and-provision-real-devices)
-  - [Exercise 2: Run the Rod Pump Simulator](#exercise-2-run-the-rod-pump-simulator)
-    - [Task 1: Record device connection information](#task-1-record-device-connection-information)
-    - [Task 2: Open the Visual Studio solution, and update connection string values](#task-2-open-the-visual-studio-solution-and-update-connection-string-values)
-    - [Task 3: Run the application](#task-3-run-the-application)
-    - [Task 4: Interpret telemetry data](#task-4-interpret-telemetry-data)
-    - [Task 5: Restart a failing pump remotely](#task-5-restart-a-failing-pump-remotely)
-  - [Exercise 3: Creating a device group](#exercise-3-creating-a-device-group)
-    - [Task 1: Create a device group using a filter](#task-1-create-a-device-group-using-a-filter)
-  - [Exercise 4: Creating a useful dashboard](#exercise-4-creating-a-useful-dashboard)
-    - [Task 1: Clearing out the default dashboard](#task-1-clearing-out-the-default-dashboard)
-    - [Task 2: Add your company logo](#task-2-add-your-company-logo)
-    - [Task 3: Add a list of Texas Rod Pumps](#task-3-add-a-list-of-texas-rod-pumps)
-    - [Task 4: Add a map displaying the locations of the Texas Rod Pumps](#task-4-add-a-map-displaying-the-locations-of-the-texas-rod-pumps)
-  - [Exercise 5: Create an Event Hub and continuously export data from IoT Central](#exercise-5-create-an-event-hub-and-continuously-export-data-from-iot-central)
-    - [Task 1: Create an Event Hub](#task-1-create-an-event-hub)
-    - [Task 2: Configure continuous data export from IoT Central](#task-2-configure-continuous-data-export-from-iot-central)
-  - [Exercise 6: Use Azure Databricks and Azure Machine Learning service to train and deploy predictive model](#exercise-6-use-azure-databricks-and-azure-machine-learning-service-to-train-and-deploy-predictive-model)
-    - [Task 1: Run the Anomaly Detection notebook](#task-1-run-the-anomaly-detection-notebook)
-  - [Exercise 7: Create an Azure Function to predict pump failure](#exercise-7-create-an-azure-function-to-predict-pump-failure)
-    - [Task 1: Create an Azure Function Application](#task-1-create-an-azure-function-application)
-    - [Task 2: Create a notification table in Azure Storage](#task-2-create-a-notification-table-in-azure-storage)
-    - [Task 3: Create a notification queue in Azure Storage](#task-3-create-a-notification-queue-in-azure-storage)
-    - [Task 4: Create notification service in Microsoft Power Automate](#task-4-create-notification-service-in-microsoft-power-automate)
-    - [Task 5: Obtain connection settings for use with the Azure Function implementation](#task-5-obtain-connection-settings-for-use-with-the-azure-function-implementation)
-    - [Task 6: Create the local settings file for the Azure Functions project](#task-6-create-the-local-settings-file-for-the-azure-functions-project)
-    - [Task 7: Review the Azure Function code](#task-7-review-the-azure-function-code)
-    - [Task 8: Run the Function App locally](#task-8-run-the-function-app-locally)
-    - [Task 9: Prepare the Azure Function App with settings](#task-9-prepare-the-azure-function-app-with-settings)
-    - [Task 10: Deploy the Function App into Azure](#task-10-deploy-the-function-app-into-azure)
-  - [After the hands-on lab](#after-the-hands-on-lab)
-    - [Task 1: Delete Lab Resources](#task-1-delete-lab-resources)
-
-<!-- /TOC -->
 
 # Predictive Maintenance for remote field devices hands-on lab step-by-step
 
@@ -202,7 +149,7 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
     |----------------|----------|-----------------| --------------|--------|--------|---------------|-------------|
     | Pump Rate       | PumpRate       | Telemetry | None | Double | None |  SPM     | Speed calculated over the time duration between the last two times the crank arm has passed the proximity sensor measured in Strokes Per Minute (SPM)  |
     | Time Pump On    | TimePumpOn     | Telemetry | Time Span | Double | Minute |  Minutes | Number of minutes the pump has been on |
-    | Motor Power     | MotorPowerKw   | Telemetry | Power | Double | None |  kW      | Measured in Kilowatts (kW) |
+    | Motor Power Kw     | MotorPowerKw   | Telemetry | Power | Double | None |  kW      | Measured in Kilowatts (kW) |
     | Motor Speed     | MotorSpeed     | Telemetry | Angular Velocity | Integer | Revolution per minute |  RPM     | including slip (RPM) |
     | Casing Friction | CasingFriction | Telemetry | None | Double | None |  PSI     | strokes per minute |
 
@@ -251,7 +198,7 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
 
     ![A portion of the Dashboard View design surface is shown with tiles added for various properties of the device.](media/view-adding-properties-tiles.png "Device property tiles")
 
-17. Spend some time now and investigate the various visualizations and settings you can set on each tile. For instance, you have the ability to customize chart types, colors and axes. You can also resize each tile individually. Select the _Save_ button in the toolbar menu to save the `Dashboard` view.
+17. Spend some time now and investigate the various visualizations and settings you can set on each tile. For instance, you have the ability to customize chart types, colors and axes. You can also resize each tile individually. Select the **Save** button in the toolbar menu to save the `Dashboard` view.
 
 18. On the `Rod Pump` device template screen, select the `Views` item from the central navigation pane, and choose `Visualizing the device` once again to create a new view. Name this view, `Command` and add a tile for the `Toggle Motor Power` command. Once complete, press the `Save` button in the toolbar. This View will allow pump operators to initiate the toggle power command from the IoT Central application.
 
@@ -261,13 +208,11 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
 
 ### Task 4: Create and provision real devices
 
-Under the hood, Azure IoT Central uses the [Azure IoT Hub Device Provisioning Service (DPS)](https://docs.microsoft.com/en-us/azure/iot-dps/about-iot-dps). The aim of DPS is to provide a consistent way to connect devices to the Azure Cloud. Devices can utilize Shared Access Signatures, or X.509 certificates to securely connect to IoT Central.
+Under the hood, Azure IoT Central uses the [Azure IoT Hub Device Provisioning Service (DPS)](https://docs.microsoft.com/en-us/azure/iot-dps/about-iot-dps). The aim of DPS is to provide a consistent way to connect devices to the Azure Cloud. Devices can utilize Shared Access Signatures (SAS), or X.509 certificates to securely connect to IoT Central.
 
 [Multiple options](https://docs.microsoft.com/en-us/azure/iot-central/core/concepts-get-connected) exist to register devices in IoT Central, ranging from individual device registration to [bulk device registration](https://docs.microsoft.com/en-us/azure/iot-central/core/howto-manage-devices#import-devices) via a comma delimited file. In this lab we will register a single device using SAS.
 
 1. In the left-hand menu of your IoT Central application, select _Devices_. Select the _Rod Pump_ template from the `Devices` blade and select the _+ New_ button from the toolbar to add a new device.
-
-    ![The Devices menu item is selected, with Rod Pump selected from the Devices blade. The + New button is highlighted in the toolbar.](media/add-real-device-menu.png "Add a device menu")
 
 2. A modal window will be displayed with an automatically generated Device ID and Device Name. You are able to overwrite these values with anything that makes sense in your downstream systems. We will be creating three real devices in this lab. Create the following as real devices, ensure `Simulate this device` remains toggled off:
 
@@ -293,7 +238,7 @@ Included with this lab is source code that will simulate the connection and tele
 
 1. In IoT Central, select _Devices_ from the left-hand menu. Then, from the devices list, select the link for _Rod Pump - DEVICE001_, and select the _Connect_ button located in the upper right corner of the device's page.
 
-    ![The device screen for DEVICE001 is displayed with the Connect button highlighted.](media/device-connect-menu.png "DEVICE001 Screen")
+    ![The device screen for DEVICE001 is displayed with the Connect button highlighted.](media/device-connect-menu1.png "DEVICE001 Screen")
 
 2. A Device connection modal is displayed, make note of the ID Scope, Device ID, as well as the primary key value.
 
@@ -303,7 +248,7 @@ Included with this lab is source code that will simulate the connection and tele
 
 ### Task 2: Open the Visual Studio solution, and update connection string values
 
-1. Using Visual Studio Code, open the `C:\MCW-Predictive-Maintenance-for-remote-field-devices-master\Hands-on lab\Resources\FieldDeviceSimulator\Fabrikam.FieldDevice.Generator` folder.
+1. Using Visual Studio Code, open the Folder `\Hands-on lab\Resources\FieldDeviceSimulator\Fabrikam.FieldDevice.Generator` folder.
 
     > If you are prompted by Visual Studio code to install additional components to enable debugging, please select the option to install the components.
 
@@ -315,7 +260,7 @@ Included with this lab is source code that will simulate the connection and tele
 
 4. Open _PumpDevice.cs_, this class represents a device in the field. It encapsulates the properties (serial number and IP address) that are expected in the properties for the device in the cloud. It also maintains its own power state. Line 73 shows the _RegisterAndConnectDeviceAsync_ method that is responsible for connecting to the global device provisioning endpoint to obtain the underlying IoT Hub connection information for the device to establish a connection to the IoT Central application (through the DeviceClient). Line 110 shows the _SendDevicePropertiesAndInitialState_ method which updates the reported properties from the device to the cloud. This is also referred to as _Device Twins_. Line 154 shows the _SendEvent_ method that sends the generated telemetry data to the cloud.
 
-### Task 3: Run the application
+1### Task 3: Run the application
 
 1. Within Visual Studio Code, expand the **.vscode** sub-folder, then open **launch.json**. Update the `console` setting to **externalTerminal**. This will cause the debugger to launch the console window into an external terminal instead of within Visual Studio Code. This is a required step since the internal terminal does not support entering values (ReadLine).
 
@@ -339,7 +284,7 @@ Included with this lab is source code that will simulate the connection and tele
 
 ### Task 4: Interpret telemetry data
 
-DEVICE001 is the rod pump that will gradually fail. Upon running the simulator for approximately 10 minutes (or 1100 messages), you can take a look at the Motor Power chart in the Device Dashboard, or on the measurements tab and watch the power consumption decrease.
+YOU CAN TAKE A 15 MINUTE BREAK :) DEVICE001 is the rod pump that will gradually fail. Upon running the simulator for approximately 10 minutes (or 1500 messages), you can take a look at the Motor Power chart in the Device Dashboard, or on the measurements tab and watch the power consumption decrease.
 
 1. In IoT Central, select the _Devices_ menu item, then select the link for _Rod Pump - DEVICE001_ in the Devices list.
 
@@ -373,6 +318,9 @@ After observing the failure of two of the rod pumps, you are able cycle the powe
 
     ![A graph of device telemetry measurements is displayed. DEVICE001 recovered after Pump Power State has been cycled.](media/device001-recovered-1.png "Instance of pump recovery")
 
+
+## Take a screenshot
+Save a screenshot similar to the previous one, showing from your own solution how the device is behaving. Upload it to ADI with name: IOT-Day2-Ex2-YOURNAME
 ## Exercise 3: Creating a device group
 
 Duration: 10 minutes
@@ -422,7 +370,7 @@ One of the main features of IoT Central is the ability to visualize the health o
 
     ![The Custom tiles items are displayed. The Image item is selected.](media/dashboard-library-image.png "Custom tiles")
 
-2. Once the tile is added to the design surface, expand the ellipsis menu on the tile, and select _Configure_. Configure the logo with the following file _C:\MCW-Predictive-Maintenance-for-remote-field-devices-master\Hands-on lab\media\fabrikam-logo.png_. Select the _Update_ button once complete.
+2. Once the tile is added to the design surface, expand the ellipsis menu on the tile, and select _Configure_. Configure the logo with the following file _\Hands-on lab\media\fabrikam-logo.png_. Select the _Update_ button once complete.
 
     ![The company logo configuration options are displayed.](media/configure-dashboard-logo.png "Configure Logo Image")
 
@@ -444,33 +392,18 @@ In the previous exercise, we created a device group that contains the devices lo
 
     ![The dashboard shows company logo and the device IDs and IP addresses.](media/dashboard-inprogress-1.png "Dashboard in progress")
 
-### Task 4: Add a map displaying the locations of the Texas Rod Pumps
+### Task 4: Add a chart displaying the Motor Power of the Texas Rod Pumps
 
-It is beneficial to see the location of certain critical Texas rod pumps. We will add a map that will display the location of each of the Texas Rod Pump devices.
 
-1. Return to the _Edit_ view of the Dashboard. Select _Start with a visual_ from the _Add a tile_ section of the menu.  Select _Map (property)_. Select _Add tile_.
 
-    ![The Rod Pump location is displayed in a map. A list of devices and their IP addresses are listed on the right-hand side.](media/add-property-map-pump-locations.png "Add Map (property) tile")
+1. Return to the _Edit_ view of the Dashboard. Select _Start with devices_  from the _Add a tile_ section of the menu.  Select the group and 3 devices and choose the telemetry _Motor Power_.
 
-2.  Once the tile is added to the design surface, expand the ellipsis menu on the tile, and select _Configure_.  Configure the map with the following settings, then click _Update_ to save the configuration changes.
 
-   | Field          | Value                                 |
-   | -------------- | ------------------------------------- |
-   | Title          | Pump Location                         |
-   | Device Group   | Texas Rod Pumps                       |
-   | Devices        | _select each device_                  |
-   | Property       | Pump Location                         |
-   
-   ![The Rod Pump location is displayed in a map. A list of devices and their IP addresses are listed on the right-hand side.](media/configure-property-map-pump-locations.png "Configure Map (property) tile")
+    ![A Motor Power (kW) tile has been added to the dashboard showing the current values for every device in the Texas Rod Pump device group.](media/dashboard-experiment2.png "Completed Dashboard with Telemetry chart")
 
-3. Observe how the device group now has a map displaying markers for each device in the set. Feel free to adjust to zoom to better infer their location.
 
-    ![The Rod Pump location is displayed in a map. A list of devices and their IP addresses are listed on the right-hand side.](media/completed-dashboard.png "Completed Dashboard")
-
-4. Return to the edit view of the Dashboard and experiment adding additional visualizations relative to the Texas Rod Pump device group. For instance, add a Line chart tile that shows the Motor Power data for all of the devices in a single chart.
-
-    ![A Motor Power (kW) tile has been added to the dashboard showing the current values for every device in the Texas Rod Pump device group.](media/dashboard-experiment.png "Completed Dashboard with Telemetry chart")
-
+## Take a screenshot
+Save a screenshot similar to the previous one, showing from your own solution how your devices are behaving. Upload it to ADI with name: IOT-Day2-Ex4-YOURNAME
 ## Exercise 5: Create an Event Hub and continuously export data from IoT Central
 
 Duration: 15 minutes
@@ -524,7 +457,7 @@ The Event Hub we will be creating will act as a collector for data coming into I
 
 ### Task 2: Configure continuous data export from IoT Central
 
-1. Return to the IoT Central application, from the left-hand menu, select **Data export**. Then select the **+ New** button from the toolbar menu.
+1. Return to the IoT Central application, from the left-hand menu, select **Data export**. Then select the **+ New export** button from the toolbar menu.
 
    ![On the left-hand menu has the Data Export link highlighted along with the + New export button on the toolbar.](media/data-export-menu.png "Data Export Menu")
 
@@ -565,43 +498,11 @@ The Event Hub we will be creating will act as a collector for data coming into I
 
    ![The Data Export screen displays the status of Event Hub creation. The status of healthy is displayed.](media/ce-eventhubfeed-running.png "Event Hub Feed is Healthy")
 
-## Exercise 6: Use Azure Databricks and Azure Machine Learning service to train and deploy predictive model
-
-Duration: 15 minutes
-
-In this exercise, we will use Azure Databricks to train a deep learning model for anomaly detection by training it to recognize normal operating conditions of a pump. We use three data sets for training: A set of telemetry generated by a pump operating under normal conditions, a pump that suffers from a gradual failure, and a pump that immediately fails.
-
-After training the model, we validate it, then register the model in your Azure Machine Learning service workspace. Finally, we deploy the model in a web service hosted by Azure Container Instances for real-time scoring from the Azure function.
-
-### Task 1: Run the Anomaly Detection notebook
-
-1. In the [Azure portal](https://portal.azure.com), open your lab resource group, then open your **Azure Databricks Service**.
-
-2. Select **Launch Workspace**. Azure Databricks will automatically sign you in through its Azure Active Directory integration.
-
-   ![Launch Workspace option is displayed.](media/databricks-launch-workspace.png "Launch Workspace")
-
-3. In Azure Databricks, select **Workspace**, select **Users**, then select your username.
-
-4. Select the `Anomaly Detection` notebook to open it.
-
-   ![The Anomaly Detection notebook is highlighted.](media/databricks-anomaly-detection-notebook.png "Workspace Folder")
-
-5. Before you can execute the cells in this notebook, you must first attach your Databricks cluster. Expand the dropdown at the top of the notebook where you see **Detached**. Select your lab cluster to attach it to the notebook. If it is not currently running, you will see an option to start the cluster.
-
-   ![The screenshot displays the lab cluster selected for attaching to the notebook. The lab configuration values are displayed.](media/databricks-notebook-attach-cluster.png "Attach cluster")
-
-6. You may use keyboard shortcuts to execute the cells, such as **Ctrl+Enter** to execute a single cell, or **Shift+Enter** to execute a cell and move to the next one below.
-
-7. Run all of the cells in the notebook and read the instructions and explanations to understand how the model is trained and deployed. You will need to provide values in the `Cmd 56` cell.
-
-8. Copy the scoring web service URL from the last cell's result after executing it. You will use this value to update a setting in your Azure function in the next exercise to let it know where the model is deployed.
-
-## Exercise 7: Create an Azure Function to predict pump failure
+## Exercise 6: Create an Azure Function to predict pump failure
 
 Duration: 45 minutes
 
-We will be using an Azure Function to read incoming telemetry from IoT Hub and send it to the HTTP endpoint of our predictive maintenance model. The function will receive a 0 or 1 from the model indicating whether or not a pump should be maintained to avoid possible failure. A notification will also be initiated through Flow to notify Field Workers of the maintenance required.
+We will be using an Azure Function to **read incoming telemetry from IoT Hub and send it to the HTTP endpoint of our predictive maintenance model (created for us by instructor)**. The function will receive a 0 or 1 from the model indicating whether or not a pump should be maintained to avoid possible failure. A notification will also be initiated through Flow to notify Field Workers of the maintenance required.
 
 ### Task 1: Create an Azure Function Application
 
@@ -609,7 +510,7 @@ We will be using an Azure Function to read incoming telemetry from IoT Hub and s
 
 2. Open your resource group for this lab.
 
-3. From the top menu, select the **+ Add** button, and search for Function App.
+3. From the top menu, select the **+ Add** button, and search for **Function App**.
 
 4. Configure the Function App as follows, then select **Next: Hosting >**:
 
@@ -637,23 +538,7 @@ We will be using an Azure Function to read incoming telemetry from IoT Hub and s
 
 6. On the Review blade, select **Create**, then **wait until the Function App is created** before continuing.
 
-### Task 2: Create a notification table in Azure Storage
-
-One of the things we would like to avoid is sending repeated notifications to the workforce in the field. Notifications should only be sent once every 24-hour period per device. To keep track of when a notification was last sent for a device, we will use a table in a Storage Account.
-
-1. In the [Azure portal](https://portal.azure.com), select **Resource groups** from the left-hand menu, then select the **Fabrikam_Oil** link from the listing.
-
-2. Select the link for the storage account that was created with the Function App in Task 1. The name will start with "storageaccount".
-
-   ![The resources are listed in the blade. The storage account is circled.](media/select-function-storage-account.png "Select the Storage Account")
-
-3. From the Storage Account left-hand menu, select **Tables** from the _Data storage_ section, then select the **+ Table** button, and create a new table named **DeviceNotifications**.
-
-   ![The storage account table administration blade is displayed. The tables link is circled on the left-hand side and the Add Table button is circled in the header.](media/create-storage-table-menu.png "Create Table in the Storage Account")
-
-4. Keep the Storage Account open in your browser for the next task.
-
-### Task 3: Create a notification queue in Azure Storage
+### Task 2: Create a notification queue in Azure Storage
 
 There are many ways to trigger flows in Microsoft Power Automate. One of them is monitoring an Azure Queue. We will use a Queue in our Azure Storage Account to host this queue.
 
@@ -665,7 +550,7 @@ There are many ways to trigger flows in Microsoft Power Automate. One of them is
 
    ![The storage account access key information is displayed. Show keys is circled.](media/copy-function-storage-access-key.png "Copy access key for the Storage Account")
 
-### Task 4: Create notification service in Microsoft Power Automate
+### Task 3: Create notification service in Microsoft Power Automate
 
 We will be using [Microsoft Power Automate](https://flow.microsoft.com/) as a means to email notifications to the workforce in the field. This flow will respond to new messages placed on the queue that we created in Task 3.
 
@@ -679,9 +564,12 @@ We will be using [Microsoft Power Automate](https://flow.microsoft.com/) as a me
 
    ![An informational dialog is displayed. The skip button is highlighted.](media/instant-flow-skip-dialog.png "Dismiss Dialog")
 
-4. From the search bar, type _queue_ to filter connectors and triggers. Then, select the **When there are messages in a queue (V2)(preview)** item from the filtered list of Triggers.
+4. From the search bar, type _queue_ to filter connectors and triggers. Then, select the **When there are messages in a queue (V2)(preview)** item from the filtered list of Triggers and click on **Start Trial**.
 
    ![The trigger dialog is displayed. Create a trigger to respond to a message in the Azure Queue is selected.](media/select-flow-trigger-type.png "Select Queue Trigger")
+
+    ![Start Trial](media/trial.png "Start Trial")
+
 
 5. Fill out the form as follows, then select the **Create** button:
 
@@ -731,7 +619,7 @@ We will be using [Microsoft Power Automate](https://flow.microsoft.com/) as a me
 
     ![The Azure Flow blade is displayed. In the left pane, the My flows link is circled. The Send an email step is circled.](media/new-flow-created.png "New Flow created")
 
-### Task 5: Obtain connection settings for use with the Azure Function implementation
+### Task 4: Obtain connection settings for use with the Azure Function implementation
 
 1. Once the Function App has been provisioned, open the **Fabrikam_Oil** resource group and select the link for the storage account that was created with the Function App in Task 1. The name will start with "storageaccount".
 
@@ -757,13 +645,13 @@ We will be using [Microsoft Power Automate](https://flow.microsoft.com/) as a me
 
 It is recommended that you never check in secrets, such as connection strings, into source control. One way to do this is to use settings files. The values stored in these files mimic environment values used in production. The local settings file is never checked into source control.
 
-1. Using Visual Studio Code, open the `C:\MCW-Predictive-Maintenance-for-remote-field-devices-master\Hands-on lab\Resources\FailurePredictionFunction` folder.
+1. Using Visual Studio Code, open the `\Hands-on lab\Resources\FailurePredictionFunction` folder.
 
 2. Upon opening the folder in Visual Studio Code, you may be prompted to restore unresolved dependencies. If this is the case, select the **Restore** button.
 
    ![A sample Restore Unresolved Dependencies dialog is displayed. The Restore button is available.](media/unresolveddependencies.png "Restore Unresolved Dependencies Dialog")
 
-3. In this folder, create a new file named _local.settings.json_ and populate it with the values obtained in the previous task as follows, then save the file (note: prediction model endpoint was obtained in Exercise 6, Task 1 - step 8):
+3. In this folder, modify a file named _local.settings.json_ and populate it with the values obtained in the previous task as follows, then save the file (note: anomaly prediction model endpoint is provided by instructor):
 
    ```json
    {
@@ -772,7 +660,7 @@ It is recommended that you never check in secrets, such as connection strings, i
         "AzureWebJobsStorage": "<paste storage account connection string>",
         "FUNCTIONS_WORKER_RUNTIME": "dotnet",
         "fabrikam-oil_RootManageSharedAccessKey_EVENTHUB": "<paste event hub namespace connection string>",
-        "PredictionModelEndpoint": "<paste prediction model endpoint>"
+        "PredictionModelEndpoint": "http://1441b4c7-7d23-4517-b070-c1ee38700073.westeurope.azurecontainer.io/score"
       }
    }
    ```
@@ -792,7 +680,7 @@ It is recommended that you never check in secrets, such as connection strings, i
 
 4. Lines 66 through 75 sends the received telemetry to the scoring service endpoint. This service will respond with a 1 - meaning the pump requires maintenance, or a 0 meaning no maintenance notifications should be sent.
 
-5. Lines 81 through 109 checks Table storage to ensure a notification for the specific device hasn't been sent in the last 24 hours. If a notification is due to be sent, it will update the table storage record with the current timestamp and send a notification by queueing a message onto the _flownotificationqueue_ queue.
+5. Lines 76-87 will send a notification by queueing a message onto the _flownotificationqueue_ queue.
 
 ### Task 8: Run the Function App locally
 
@@ -843,7 +731,7 @@ It is recommended that you never check in secrets, such as connection strings, i
 
    ![The Visual Studio Code command palette is displaying Azure Functions. The Deploy to Function App command is circled.](media/commandpalettedeploytofunctionapp.png "Deploy to Function App Command")
 
-4. The first step of this command is to identify where we are deploying the function to. In our case, we have already created a Function App to house our function called **pumpfunctions**. Select this value from the list of available choices.
+4. The first step of this command is to identify where we are deploying the function to. In our case, we have already created a Function App to house our function in Azure. Select this value from the list of available choices (NOTE: you may have named the Azure Function app different)
 
    ![The Visual Studio Code command palette is displaying potential destinations for deployment of our function, the pumpfunctions function app is highlighted](media/funcdeploydestinationapp.png "pumpfunctions function app is highlighted")
 
@@ -858,6 +746,41 @@ It is recommended that you never check in secrets, such as connection strings, i
 7. Returning to the Azure Portal, in the **Fabrikam_Oil** resource group, open the **pumpfunctions** function app and observe that our function that we created in Visual Studio Code has been deployed.
 
    ![The Azure Portal Function Application overview window is displayed with the pumpfunctions application expanded. The functions node is also expanded and the function named PumpFailurePrediction is highlighted.](media/azurefunctiondeployed.png "Functions node is expanded")
+
+# OPTIONAL (done by Unai)
+## Exercise : Use Azure Databricks and Azure Machine Learning service to train and deploy predictive model
+
+Duration: 45 minutes
+
+In this exercise, we will use Azure Databricks to train a deep learning model for anomaly detection by training it to recognize normal operating conditions of a pump. We use three data sets for training: A set of telemetry generated by a pump operating under normal conditions, a pump that suffers from a gradual failure, and a pump that immediately fails.
+
+After training the model, we validate it, then register the model in your Azure Machine Learning service workspace. Finally, we deploy the model in a web service hosted by Azure Container Instances for real-time scoring from the Azure function.
+
+### Task 1: Run the Anomaly Detection notebook
+
+1. In the [Azure portal](https://portal.azure.com), open your lab resource group, then open your **Azure Databricks Service**.
+
+2. Select **Launch Workspace**. Azure Databricks will automatically sign you in through its Azure Active Directory integration.
+
+   ![Launch Workspace option is displayed.](media/databricks-launch-workspace.png "Launch Workspace")
+
+3. In Azure Databricks, select **Workspace**, select **Users**, then select your username.
+
+4. Select the `Anomaly Detection` notebook to open it.
+
+   ![The Anomaly Detection notebook is highlighted.](media/databricks-anomaly-detection-notebook.png "Workspace Folder")
+
+5. Before you can execute the cells in this notebook, you must first attach your Databricks cluster. Expand the dropdown at the top of the notebook where you see **Detached**. Select your lab cluster to attach it to the notebook. If it is not currently running, you will see an option to start the cluster.
+
+   ![The screenshot displays the lab cluster selected for attaching to the notebook. The lab configuration values are displayed.](media/databricks-notebook-attach-cluster.png "Attach cluster")
+
+6. You may use keyboard shortcuts to execute the cells, such as **Ctrl+Enter** to execute a single cell, or **Shift+Enter** to execute a cell and move to the next one below.
+
+7. Run all of the cells in the notebook and read the instructions and explanations to understand how the model is trained and deployed. You will need to provide values in the `Cmd 56` cell.
+
+8. Copy the scoring web service URL from the last cell's result after executing it. You will use this value to update a setting in your Azure function in the next exercise to let it know where the model is deployed.
+
+
 
 ## After the hands-on lab
 
