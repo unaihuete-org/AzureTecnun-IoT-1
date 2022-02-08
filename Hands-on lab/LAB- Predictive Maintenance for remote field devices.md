@@ -733,8 +733,12 @@ It is recommended that you never check in secrets, such as connection strings, i
 7. Returning to the Azure Portal, in the **Fabrikam_Oil** resource group, open the **pumpfunctions** function app and observe that our function that we created in Visual Studio Code has been deployed.
 
    ![The Azure Portal Function Application overview window is displayed with the pumpfunctions application expanded. The functions node is also expanded and the function named PumpFailurePrediction is highlighted.](media/azurefunctiondeployed.png "Functions node is expanded")
+   
+## Take a screenshot
+Save a screenshot showing the received email. Upload it to ADI with name: IOT-Day2-Ex7-YOURNAME
 
 # OPTIONAL (done by Unai)
+
 ## Exercise : Use Azure Databricks and Azure Machine Learning service to train and deploy predictive model
 
 Duration: 45 minutes
