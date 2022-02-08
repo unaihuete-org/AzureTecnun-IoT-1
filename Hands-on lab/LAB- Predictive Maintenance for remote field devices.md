@@ -682,21 +682,8 @@ It is recommended that you never check in secrets, such as connection strings, i
 
 5. Lines 76-87 will send a notification by queueing a message onto the _flownotificationqueue_ queue.
 
-### Task 8: Run the Function App locally
 
-1. Select <kbd>Ctrl</kbd>+<kbd>F5</kbd> to run the Azure Function code.
-
-2. After some time, you should see log statements indicating that a message has been queued (indicating that Microsoft Power Automate will send a notification email).
-
-   ![A sample function log is displayed. A notification of email has been sent is circled.](media/azure-function-output.png "Azure Function Output")
-
-3. Once a message has been placed on the _flownotificationqueue_, it will trigger the notification flow that we created and send an email to the field workers. These emails are sent in 5-minute intervals.
-
-   ![A sample Microsoft Power Automate email message is displayed.](media/flow-email-receipt.png "Notification email received")
-
-4. You can now exit the locally running functions by selecting the Terminal window by pressing the <kbd>Ctrl</kbd>+<kbd>c</kbd> keys.
-
-### Task 9: Prepare the Azure Function App with settings
+### Task 8: Prepare the Azure Function App with settings
 
 1. In Task 6, we created a local settings file to hold environment variables that are used in our function code. We need to mirror these values in the Azure Function App as well. In the Azure portal, access the **Fabrikam_Oil** resource group, and open the **pumpfunctions** Function Application.
 
@@ -719,7 +706,7 @@ It is recommended that you never check in secrets, such as connection strings, i
 
    ![The Application Settings tab is selected and the Save button is highlighted.](media/functionconfigurationsave.png "Save Application Setting")
 
-### Task 10: Deploy the Function App into Azure
+### Task 9: Deploy the Function App into Azure
 
 1. Now that we have been able to successfully run our Functions locally, we are ready to deploy them to the cloud. The first step to deployment is to ensure that you are logged in to your Azure Account. To log into your Azure account, select the following shortcut to display the command palette: <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>p</kbd>.
 
