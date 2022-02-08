@@ -733,6 +733,8 @@ It is recommended that you never check in secrets, such as connection strings, i
 7. Returning to the Azure Portal, in the **Fabrikam_Oil** resource group, open the **pumpfunctions** function app and observe that our function that we created in Visual Studio Code has been deployed.
 
    ![The Azure Portal Function Application overview window is displayed with the pumpfunctions application expanded. The functions node is also expanded and the function named PumpFailurePrediction is highlighted.](media/azurefunctiondeployed.png "Functions node is expanded")
+  
+8. Make sure you are running the IOT device simulator program launched in previous [Task](https://github.com/unaihuete-org/AzureTecnun-IoT-1/blob/main/Hands-on%20lab/LAB-%20Predictive%20Maintenance%20for%20remote%20field%20devices.md#task-3-run-the-application). Review Function is creating queue messages and that Power Automate is sending emails.
    
 ## Take a screenshot
 Save a screenshot showing the received email. Upload it to ADI with name: IOT-Day2-Ex7-YOURNAME
