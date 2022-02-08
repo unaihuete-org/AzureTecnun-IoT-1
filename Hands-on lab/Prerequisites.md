@@ -22,21 +22,6 @@ The names of manufacturers, products, or URLs are provided for informational pur
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
-**Contents**
-
-<!-- TOC -->
-
-- [Predictive Maintenance for remote field devices before the hands-on lab setup guide](#predictive-maintenance-for-remote-field-devices-before-the-hands-on-lab-setup-guide)
-  - [Requirements](#requirements)
-  - [Before the hands-on lab](#before-the-hands-on-lab)
-    - [Task 1: Download the lab files](#task-1-download-the-lab-files)
-    - [Task 2: Provision a resource group](#task-2-provision-a-resource-group)
-    - [Task 3: Create an Azure Databricks service](#task-3-create-an-azure-databricks-service)
-    - [Task 4: Create Azure Databricks cluster](#task-4-create-azure-databricks-cluster)
-    - [Task 5: Import lab notebook into Azure Databricks](#task-5-import-lab-notebook-into-azure-databricks)
-    - [Task 6: Create Azure Machine Learning service workspace](#task-6-create-azure-machine-learning-service-workspace)
-
-<!-- /TOC -->
 
 # Predictive Maintenance for remote field devices before the hands-on lab setup guide
 
@@ -89,6 +74,8 @@ In this task, you will create an Azure resource group for the resources used thr
 
 6. On the Summary blade, select **Create** to provision your resource group.
 
+# OPTIONAL
+
 ### Task 3: Create an Azure Databricks service
 
 Azure Databricks is used to train and deploy a machine learning model that predicts an oil pump failure, based on incoming telemetry.
@@ -133,7 +120,7 @@ Azure Databricks is used to train and deploy a machine learning model that predi
    | Cluster Mode               | _select `Standard`_                                                                          |
    | Pool                       | _select `None`_                                                                              |
    | Databricks Runtime Version | _select `Runtime: 7.4 (Scala 2.12, Spark 3.0.1)`_                                         |
-   | Autopilot Options          | _uncheck `Enable autoscaling` and check `Terminate after...`, with a value of `120` minutes_ |
+   | Autopilot Options          | _uncheck `Enable autoscaling` and check `Terminate after...`, with a value of `200` minutes_ |
    | Worker Type                | _select `Standard_DS3_v2`_                                                                   |
    | Driver Type                | _select `Same as worker`_                                                                    |
    | Workers                    | _enter `1`_                                                                                  |

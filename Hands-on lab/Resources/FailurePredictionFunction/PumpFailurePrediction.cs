@@ -76,38 +76,17 @@ namespace Fabrikam.Oil.Pumps
                     if (modelResult.Content == "1")
                     {
                         // impending failure detected from model - send notification.
-
-                        // Check when the device had its last notification.
                         var cloudStorageAccount = CloudStorageAccount.Parse(Environment.GetEnvironmentVariable("AzureWebJobsStorage"));
-                        var table = cloudStorageAccount.CreateCloudTableClient().GetTableReference("DeviceNotifications");
-
-                        var retrieveEntityOp = TableOperation.Retrieve<DeviceNotification>("Devices", device.DeviceID);
-                        var entity = (DeviceNotification)(await table.ExecuteAsync(retrieveEntityOp)).Result;
-                        var isNewEntity = false;
-                        if (entity == null)
-                        {
-                            isNewEntity = true;
-                            entity = new DeviceNotification(device.DeviceID) {LastNotificationUtc = DateTime.UtcNow};
-                        }
-
-                        var timeSpan = DateTime.UtcNow - entity.LastNotificationUtc;
-                        if (isNewEntity || timeSpan.Hours > 24)
-                        {
-                            // if it has been greater than 24 hours - update the notification timestamp.
-                            entity.LastNotificationUtc = DateTime.UtcNow;
-                            var replaceEntityOp = TableOperation.InsertOrReplace(entity);
-                            await table.ExecuteAsync(replaceEntityOp);
-
-                            // Notify workforce via Microsoft Power Automate triggered by queue entry.
-                            var queue = cloudStorageAccount.CreateCloudQueueClient().GetQueueReference("flownotificationqueue");
-                            var message = new StringBuilder(device.DeviceID + " has been flagged as requiring maintenance by the ");
-                            message.Append("predictive maintenance system. ");
-                            message.Append("Please visit this pump and return it to normal operating parameters.");
-                            var queueMessage = new CloudQueueMessage(message.ToString());
-                            await queue.AddMessageAsync(queueMessage);
-                            log.LogInformation($"Notification email for {device.DeviceID} queued for delivery");
-                        }
+                        // Notify workforce via Microsoft Power Automate triggered by queue entry.
+                        var queue = cloudStorageAccount.CreateCloudQueueClient().GetQueueReference("flownotificationqueue");
+                        var message = new StringBuilder(device.DeviceID + " has been flagged as requiring maintenance by the ");
+                        message.Append("predictive maintenance system. ");
+                        message.Append("Please visit this pump and return it to normal operating parameters.");
+                        var queueMessage = new CloudQueueMessage(message.ToString());
+                        await queue.AddMessageAsync(queueMessage);
+                        log.LogInformation($"Notification email for {device.DeviceID} queued for delivery");
                     }
+                    
                 }
             }
             catch (Exception e)
