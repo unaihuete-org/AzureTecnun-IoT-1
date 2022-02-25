@@ -38,21 +38,8 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 ## Before the hands-on lab
 
-### Task 1: Download the lab files
 
-Open the Azure Portal with the provided account. Look for **LabVM-rg** resource group. Look for **LabVM** virtual machine, open and **Connect**. Download the RDP file and use the username/password provided to launch the Virtual Machine. 
-
-From the machine, download the lab artifacts from GitHub.
-
-1. In a web browser, navigate to the [LAB repository](https://github.com/unaihuete-org/AzureTecnun-IoT-1).
-
-2. On the repo page, expand the **Code**, then select **Download ZIP**.
-
-   ![Download .zip containing the repository](media/github-download-repo.png 'Download ZIP')
-
-3. Unzip (right click > Extract all) the contents to your root hard drive (for example, Desktop folder). This will create a folder on your root drive named `AzureTecnun-IoT-1-main`.
-
-### Task 2: Provision a resource group
+### Task: Provision a resource group
 
 In this task, you will create an Azure resource group for the resources used throughout this lab.
 
